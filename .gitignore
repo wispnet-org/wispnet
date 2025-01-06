@@ -1,4 +1,4 @@
-# WISPNET macOS Ignore
 .DS_Store
+resources/.DS_Store
 .DS_Store?
 *.db
