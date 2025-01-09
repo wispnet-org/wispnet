@@ -20,7 +20,7 @@
       border: 1px solid #ddd;
       border-radius: 8px;
       padding: 20px;
-      width: 300px;
+      width: 600px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
     .dashboard h2 {
@@ -66,13 +66,23 @@
       <span>twingate.wispnet.org</span>
       <span id="status-twingate-wispnet-org">Checking <span class="status-dot yellow">•</span></span>
     </div>
+  <div class="field" id="field-betelchurch-org">
+    <span>betelchurch.org</span>
+    <span id="status-betelchurch-org">Checking <span class="status-dot yellow">•</span></span>
   </div>
+  <div class="field" id="field-betelchapel-org">
+    <span>betelchapel.org</span>
+    <span id="status-betelchapel-org">Checking <span class="status-dot yellow">•</span></span>
+  </div>
+</div>
 
   <script>
     const endpoints = [
       { id: 'wispnet-org', url: 'https://wispnet.org' },
       { id: 'wisp-wispnet-org', url: 'https://wisp.wispnet.org' },
-      { id: 'twingate-wispnet-org', url: 'https://twingate.wispnet.org' }
+      { id: 'twingate-wispnet-org', url: 'https://twingate.wispnet.org' },
+      { id: 'betelchurch-org', url: 'https://betelchurch.org' },
+      { id: 'betelchapel-org', url: 'https://betelchapel.org' },
     ];
 
     async function checkStatus(endpoint) {
