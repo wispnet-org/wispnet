@@ -1,0 +1,139 @@
+18:28:43.000411 TIPC v2.0 203.3250.5 > 203.3250.0, headerlength 40 bytes, MessageSize 40 bytes, Neighbor Detection Protocol internal, messageType Link request
+18:28:43.043412 IP6 iphone.local.58783 > wisp.local.61647: Flags [.], ack 6966142, win 4096, length 0
+18:28:43.043685 IP6 wisp.local.61647 > iphone.local.58783: Flags [.], ack 1, win 2048, options [nop,nop,TS val 630702006 ecr 1685508891], length 0
+18:28:43.338509 ARP, Announcement 192.168.1.177, length 46
+18:28:43.466042 STP 802.1d, Config, Flags [none], bridge-id 7000.dc:8d:8a:1d:e2:d2.8002, length 35
+18:28:43.553062 LLDP, length 46
+18:28:43.553068 LLDP, length 46
+18:28:43.590481 IP 192.168.1.105.dddp > 239.255.250.250.dddp: UDP, length 101
+18:28:43.718955 IP 100.96.0.2.56156 > 100.95.0.251.domain: 47355+ PTR? 177.1.168.192.in-addr.arpa. (44)
+18:28:43.720349 IP 192.168.1.158.64412 > 104.16.248.249.https: Flags [P.], seq 2262627044:2262627263, ack 1973351384, win 2048, options [nop,nop,TS val 1367709784 ecr 1501408659], length 219
+18:28:43.724053 IP 104.16.248.249.https > 192.168.1.158.64412: Flags [.], ack 219, win 93, options [nop,nop,TS val 1501409725 ecr 1367709784], length 0
+18:28:43.725501 IP 104.16.248.249.https > 192.168.1.158.64412: Flags [P.], seq 1:325, ack 219, win 93, options [nop,nop,TS val 1501409726 ecr 1367709784], length 324
+18:28:43.725631 IP 192.168.1.158.64412 > 104.16.248.249.https: Flags [.], ack 325, win 2042, options [nop,nop,TS val 1367709789 ecr 1501409726], length 0
+18:28:43.726021 IP 100.95.0.251.domain > 100.96.0.2.56156: 47355 NXDomain 0/0/0 (44)
+18:28:43.728480 IP 100.96.0.2.49238 > 100.95.0.251.domain: 28352+ PTR? 105.1.168.192.in-addr.arpa. (44)
+18:28:43.729042 IP 192.168.1.158.64412 > 104.16.248.249.https: Flags [P.], seq 219:438, ack 325, win 2048, options [nop,nop,TS val 1367709792 ecr 1501409726], length 219
+18:28:43.734779 IP 104.16.248.249.https > 192.168.1.158.64412: Flags [P.], seq 325:649, ack 438, win 93, options [nop,nop,TS val 1501409735 ecr 1367709792], length 324
+18:28:43.734891 IP 192.168.1.158.64412 > 104.16.248.249.https: Flags [.], ack 649, win 2042, options [nop,nop,TS val 1367709798 ecr 1501409735], length 0
+18:28:43.735165 IP 100.95.0.251.domain > 100.96.0.2.49238: 28352 NXDomain 0/0/0 (44)
+18:28:43.738856 ARP, Request who-has 192.168.1.254 tell 192.168.1.122, length 46
+18:28:44.046333 IP6 iphone.local.58783 > wisp.local.61647: Flags [.], ack 1, win 4096, length 0
+18:28:44.046649 IP6 wisp.local.61647 > iphone.local.58783: Flags [.], ack 1, win 2048, options [nop,nop,TS val 630703009 ecr 1685508891], length 0
+18:28:44.133597 IP6 2600:1700:1fd8:1c40:8eb:e503:38bf:eee5.61275 > 2620:149:1363:2::d.https: quic, protected
+18:28:44.138016 IP6 2620:149:1363:2::d.https > 2600:1700:1fd8:1c40:8eb:e503:38bf:eee5.61275: quic, protected
+18:28:44.599078 50:c7:bf:75:18:d4 (oui Unknown) > Broadcast, ethertype IEEE1905.1 (0x893a), length 123: 
+	0x0000:  0000 0004 0000 00c0 0b00 5f00 1d0f 010a  .........._.....
+	0x0010:  0006 50c7 bf75 18d4 0300 0100 0400 0100  ..P..u..........
+	0x0020:  0500 0100 0600 0650 c7bf 7518 d407 0010  .......P..u.....
+	0x0030:  0a7b ae74 ddd5 6b51 73cd 6df7 88da a695  .{.t..kQs.m.....
+	0x0040:  0b00 04c0 a801 430c 0001 000d 0004 0000  ......C.........
+	0x0050:  0000 0f00 04c0 a800 0008 0002 0000 0900  ................
+	0x0060:  0200 000e 0001 0000 0000 0000 00         .............
+18:28:44.739780 IP 100.96.0.2.59051 > 100.95.0.251.domain: 9925+ PTR? 2.0.96.100.in-addr.arpa. (41)
+18:28:44.740205 IP 100.95.0.251.domain > 100.96.0.2.59051: 9925 NXDomain* 0/0/0 (41)
+18:28:44.741869 IP 100.96.0.2.63369 > 100.95.0.251.domain: 44547+ PTR? 251.0.95.100.in-addr.arpa. (43)
+18:28:44.742660 IP 192.168.1.158.64412 > 104.16.248.249.https: Flags [P.], seq 438:656, ack 649, win 2048, options [nop,nop,TS val 1367710806 ecr 1501409735], length 218
+18:28:44.748229 IP 104.16.248.249.https > 192.168.1.158.64412: Flags [P.], seq 649:972, ack 656, win 93, options [nop,nop,TS val 1501410749 ecr 1367710806], length 323
+18:28:44.748357 IP 192.168.1.158.64412 > 104.16.248.249.https: Flags [.], ack 972, win 2042, options [nop,nop,TS val 1367710812 ecr 1501410749], length 0
+18:28:44.748734 IP 100.95.0.251.domain > 100.96.0.2.63369: 44547 NXDomain 0/0/0 (43)
+18:28:44.750441 IP 100.96.0.2.59152 > 100.95.0.251.domain: 56567+ PTR? 158.1.168.192.in-addr.arpa. (44)
+18:28:44.750769 IP 192.168.1.158.64412 > 104.16.248.249.https: Flags [P.], seq 656:875, ack 972, win 2048, options [nop,nop,TS val 1367710814 ecr 1501410749], length 219
+18:28:44.756672 IP 104.16.248.249.https > 192.168.1.158.64412: Flags [P.], seq 972:1296, ack 875, win 93, options [nop,nop,TS val 1501410757 ecr 1367710814], length 324
+18:28:44.756869 IP 192.168.1.158.64412 > 104.16.248.249.https: Flags [.], ack 1296, win 2042, options [nop,nop,TS val 1367710820 ecr 1501410757], length 0
+18:28:44.757415 IP 100.95.0.251.domain > 100.96.0.2.59152: 56567 NXDomain 0/0/0 (44)
+18:28:44.760198 IP 100.96.0.2.49908 > 100.95.0.251.domain: 10098+ PTR? 254.1.168.192.in-addr.arpa. (44)
+18:28:44.760727 IP 192.168.1.158.64412 > 104.16.248.249.https: Flags [P.], seq 875:1094, ack 1296, win 2048, options [nop,nop,TS val 1367710824 ecr 1501410757], length 219
+18:28:44.767305 IP 104.16.248.249.https > 192.168.1.158.64412: Flags [P.], seq 1296:1620, ack 1094, win 93, options [nop,nop,TS val 1501410768 ecr 1367710824], length 324
+18:28:44.767445 IP 192.168.1.158.64412 > 104.16.248.249.https: Flags [.], ack 1620, win 2042, options [nop,nop,TS val 1367710831 ecr 1501410768], length 0
+18:28:44.767748 IP 100.95.0.251.domain > 100.96.0.2.49908: 10098 NXDomain 0/0/0 (44)
+18:28:44.769125 IP 100.96.0.2.54649 > 100.95.0.251.domain: 59133+ PTR? 122.1.168.192.in-addr.arpa. (44)
+18:28:44.769556 IP 192.168.1.158.64412 > 104.16.248.249.https: Flags [P.], seq 1094:1313, ack 1620, win 2048, options [nop,nop,TS val 1367710833 ecr 1501410768], length 219
+18:28:44.775805 IP 104.16.248.249.https > 192.168.1.158.64412: Flags [P.], seq 1620:1944, ack 1313, win 93, options [nop,nop,TS val 1501410776 ecr 1367710833], length 324
+18:28:44.775892 IP 192.168.1.158.64412 > 104.16.248.249.https: Flags [.], ack 1944, win 2042, options [nop,nop,TS val 1367710839 ecr 1501410776], length 0
+18:28:44.776112 IP 100.95.0.251.domain > 100.96.0.2.54649: 59133 NXDomain 0/0/0 (44)
+18:28:44.927011 IP6 2600:1700:1fd8:1c40:8eb:e503:38bf:eee5.65019 > 2600:1900:4001:566:8000::.nat-stun-port: UDP, length 20
+18:28:44.927802 IP 192.168.1.158.59755 > 100.54.31.34.bc.googleusercontent.com.nat-stun-port: UDP, length 20
+18:28:44.952911 IP6 2600:1900:4001:566:8000::.nat-stun-port > 2600:1700:1fd8:1c40:8eb:e503:38bf:eee5.65019: UDP, length 92
+18:28:44.952916 IP6 fe80::457:2239:80ee:f758.dhcpv6-client > ff02::1:2.dhcpv6-server: dhcp6 confirm
+18:28:44.954218 IP 100.54.31.34.bc.googleusercontent.com.nat-stun-port > 192.168.1.158.59755: UDP, length 56
+18:28:44.975330 IP6 :: > ff02::1:ff00:36: ICMP6, neighbor solicitation, who has 2600:1700:1fd8:1c40::36, length 32
+18:28:45.049322 IP6 iphone.local.58783 > wisp.local.61647: Flags [.], ack 1, win 4096, length 0
+18:28:45.049594 IP6 wisp.local.61647 > iphone.local.58783: Flags [.], ack 1, win 2048, options [nop,nop,TS val 630704012 ecr 1685508891], length 0
+18:28:45.088562 IP 192.168.1.246.mdns > mdns.mcast.net.mdns: 0 [2q] PTR (QU)? _companion-link._tcp.local. PTR (QU)? _rdlink._tcp.local. (58)
+18:28:45.088953 IP6 fe80::457:2239:80ee:f758.mdns > ff02::fb.mdns: 0 [2q] PTR (QU)? _companion-link._tcp.local. PTR (QU)? _rdlink._tcp.local. (58)
+18:28:45.200113 IP 192.168.1.158.mdns > 192.168.1.246.mdns: 0*- [0q] 1/0/7 PTR WilliamM-bM-^@M-^Ys MacBook Air._companion-link._tcp.local. (424)
+18:28:45.514064 STP 802.1d, Config, Flags [none], bridge-id 7000.dc:8d:8a:1d:e2:d2.8002, length 35
+18:28:45.783332 IP 100.96.0.2.57295 > 100.95.0.251.domain: 63293+ PTR? 100.54.31.34.in-addr.arpa. (43)
+18:28:45.784348 IP 192.168.1.158.64412 > 104.16.248.249.https: Flags [P.], seq 1313:1531, ack 1944, win 2048, options [nop,nop,TS val 1367711848 ecr 1501410776], length 218
+18:28:45.828881 IP 104.16.248.249.https > 192.168.1.158.64412: Flags [.], ack 1531, win 93, options [nop,nop,TS val 1501411830 ecr 1367711848], length 0
+18:28:46.051806 IP 104.16.248.249.https > 192.168.1.158.64412: Flags [P.], seq 1944:2318, ack 1531, win 93, options [nop,nop,TS val 1501412052 ecr 1367711848], length 374
+18:28:46.052019 IP 192.168.1.158.64412 > 104.16.248.249.https: Flags [.], ack 2318, win 2042, options [nop,nop,TS val 1367712115 ecr 1501412052], length 0
+18:28:46.052140 IP6 iphone.local.58783 > wisp.local.61647: Flags [.], ack 1, win 4096, length 0
+18:28:46.052361 IP6 wisp.local.61647 > iphone.local.58783: Flags [.], ack 1, win 2048, options [nop,nop,TS val 630705014 ecr 1685508891], length 0
+18:28:46.052578 IP 100.95.0.251.domain > 100.96.0.2.57295: 63293 1/0/0 PTR 100.54.31.34.bc.googleusercontent.com. (94)
+18:28:46.079593 IP 192.168.1.246.mdns > mdns.mcast.net.mdns: 0 [4a] [2q] PTR (QM)? _companion-link._tcp.local. PTR (QM)? _rdlink._tcp.local. (164)
+18:28:46.079929 IP6 fe80::457:2239:80ee:f758.mdns > ff02::fb.mdns: 0 [4a] [2q] PTR (QM)? _companion-link._tcp.local. PTR (QM)? _rdlink._tcp.local. (164)
+18:28:46.152514 IP 192.168.1.158.mdns > mdns.mcast.net.mdns: 0 PTR (QU)? 8.5.7.f.e.e.0.8.9.3.2.2.7.5.4.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa. (90)
+18:28:46.152624 IP6 wisp.local.mdns > ff02::fb.mdns: 0 PTR (QU)? 8.5.7.f.e.e.0.8.9.3.2.2.7.5.4.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa. (90)
+18:28:46.152766 IP6 wisp.local.mdns > ff02::fb.mdns: 0 PTR (QU)? 8.5.7.f.e.e.0.8.9.3.2.2.7.5.4.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa. (90)
+18:28:46.152956 IP wisp.local.mdns > mdns.mcast.net.mdns: 0 PTR (QU)? 8.5.7.f.e.e.0.8.9.3.2.2.7.5.4.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa. (90)
+18:28:46.153169 IP6 wisp.local.mdns > ff02::fb.mdns: 0 PTR (QU)? 8.5.7.f.e.e.0.8.9.3.2.2.7.5.4.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa. (90)
+18:28:46.554878 LLDP, length 46
+18:28:46.554883 LLDP, length 46
+18:28:46.599069 50:c7:bf:75:18:d4 (oui Unknown) > Broadcast, ethertype IEEE1905.1 (0x893a), length 123: 
+	0x0000:  0000 0004 0000 00c0 0b00 5f00 1d0f 010a  .........._.....
+	0x0010:  0006 50c7 bf75 18d4 0300 0100 0400 0100  ..P..u..........
+	0x0020:  0500 0100 0600 0650 c7bf 7518 d407 0010  .......P..u.....
+	0x0030:  0a7b ae74 ddd5 6b51 73cd 6df7 88da a695  .{.t..kQs.m.....
+	0x0040:  0b00 04c0 a801 430c 0001 000d 0004 0000  ......C.........
+	0x0050:  0000 0f00 04c0 a800 0008 0002 0000 0900  ................
+	0x0060:  0200 000e 0001 0000 0000 0000 00         .............
+18:28:46.599080 50:c7:bf:75:18:d4 (oui Unknown) > 01:80:c2:00:00:13 (oui Unknown), ethertype IEEE1905.1 (0x893a), length 123: 
+	0x0000:  0000 0004 0000 00c0 0b00 5f00 1d0f 010a  .........._.....
+	0x0010:  0006 50c7 bf75 18d4 0300 0100 0400 0100  ..P..u..........
+	0x0020:  0500 0100 0600 0650 c7bf 7518 d407 0010  .......P..u.....
+	0x0030:  0a7b ae74 ddd5 6b51 73cd 6df7 88da a695  .{.t..kQs.m.....
+	0x0040:  0b00 04c0 a801 430c 0001 000d 0004 0000  ......C.........
+	0x0050:  0000 0f00 04c0 a800 0008 0002 0000 0900  ................
+	0x0060:  0200 000e 0001 0000 0000 0000 00         .............
+18:28:46.599180 50:c7:bf:75:18:d4 (oui Unknown) > 01:80:c2:00:00:13 (oui Unknown), ethertype IEEE1905.1 (0x893a), length 123: 
+	0x0000:  0000 0004 0000 00c0 0b00 5f00 1d0f 010a  .........._.....
+	0x0010:  0006 50c7 bf75 18d4 0300 0100 0400 0100  ..P..u..........
+	0x0020:  0500 0100 0600 0650 c7bf 7518 d407 0010  .......P..u.....
+	0x0030:  0a7b ae74 ddd5 6b51 73cd 6df7 88da a695  .{.t..kQs.m.....
+	0x0040:  0b00 04c0 a801 430c 0001 000d 0004 0000  ......C.........
+	0x0050:  0000 0f00 04c0 a800 0008 0002 0000 0900  ................
+	0x0060:  0200 000e 0001 0000 0000 0000 00         .............
+18:28:46.985540 IP 0.0.0.0.bootpc > broadcasthost.bootps: BOOTP/DHCP, Request from f6:af:e7:d5:27:1c (oui Unknown), length 300
+18:28:47.019561 IP6 blue-room.local > ff02::1:ff75:7066: ICMP6, neighbor solicitation, who has fe80::cff:5a92:8075:7066, length 32
+18:28:47.054271 IP6 iphone.local.58783 > wisp.local.61647: Flags [.], ack 1, win 4096, length 0
+18:28:47.054569 IP6 wisp.local.61647 > iphone.local.58783: Flags [.], ack 1, win 2048, options [nop,nop,TS val 630706017 ecr 1685508891], length 0
+18:28:47.154781 IP 192.168.1.158.mdns > mdns.mcast.net.mdns: 0 PTR (QM)? 8.5.7.f.e.e.0.8.9.3.2.2.7.5.4.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa. (90)
+18:28:47.154909 IP6 wisp.local.mdns > ff02::fb.mdns: 0 PTR (QM)? 8.5.7.f.e.e.0.8.9.3.2.2.7.5.4.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa. (90)
+18:28:47.155011 IP6 wisp.local.mdns > ff02::fb.mdns: 0 PTR (QM)? 8.5.7.f.e.e.0.8.9.3.2.2.7.5.4.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa. (90)
+18:28:47.155226 IP wisp.local.mdns > mdns.mcast.net.mdns: 0 PTR (QM)? 8.5.7.f.e.e.0.8.9.3.2.2.7.5.4.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa. (90)
+18:28:47.155293 IP6 wisp.local.mdns > ff02::fb.mdns: 0 PTR (QM)? 8.5.7.f.e.e.0.8.9.3.2.2.7.5.4.0.0.0.0.0.0.0.0.0.0.0.0.0.0.8.e.f.ip6.arpa. (90)
+18:28:47.497969 STP 802.1d, Config, Flags [none], bridge-id 7000.dc:8d:8a:1d:e2:d2.8002, length 35
+18:28:47.714498 IP6 2600:1700:1fd8:1c40:8eb:e503:38bf:eee5.62137 > 2620:149:a42:a04::5.https: quic, protected
+18:28:47.721107 IP6 2620:149:a42:a04::5.https > 2600:1700:1fd8:1c40:8eb:e503:38bf:eee5.62137: quic, protected
+18:28:48.055449 IP6 wisp.local.61647 > iphone.local.58783: Flags [.], ack 1, win 2048, length 0
+18:28:48.057079 IP6 iphone.local.58783 > wisp.local.61647: Flags [.], ack 1, win 4096, length 0
+18:28:48.057166 IP6 iphone.local.58783 > wisp.local.61647: Flags [.], ack 1, win 4096, options [nop,nop,TS val 1685514906 ecr 630706017], length 0
+18:28:48.057335 IP6 wisp.local.61647 > iphone.local.58783: Flags [.], ack 1, win 2048, options [nop,nop,TS val 630707020 ecr 1685508891], length 0
+18:28:48.101379 IP6 2600:1700:1fd8:1c40:8eb:e503:38bf:eee5.65385 > 2620:149:1363:2::d.https: quic, protected
+18:28:48.107373 IP6 2620:149:1363:2::d.https > 2600:1700:1fd8:1c40:8eb:e503:38bf:eee5.65385: quic, protected
+18:28:48.177448 IP 0.0.0.0.bootpc > broadcasthost.bootps: BOOTP/DHCP, Request from f6:af:e7:da:2b:00 (oui Unknown), length 300
+18:28:48.218401 IP6 blue-room.local > ff02::1:ff75:7066: ICMP6, neighbor solicitation, who has fe80::cff:5a92:8075:7066, length 32
+18:28:48.285115 IP 192.168.1.76.17500 > 192.168.1.255.17500: UDP, length 372
+18:28:48.285224 IP 192.168.1.76.17500 > 192.168.1.255.17500: UDP, length 383
+18:28:48.599032 50:c7:bf:75:18:d4 (oui Unknown) > Broadcast, ethertype IEEE1905.1 (0x893a), length 123: 
+	0x0000:  0000 0004 0000 00c0 0b00 5f00 1d0f 010a  .........._.....
+	0x0010:  0006 50c7 bf75 18d4 0300 0100 0400 0100  ..P..u..........
+	0x0020:  0500 0100 0600 0650 c7bf 7518 d407 0010  .......P..u.....
+	0x0030:  0a7b ae74 ddd5 6b51 73cd 6df7 88da a695  .{.t..kQs.m.....
+	0x0040:  0b00 04c0 a801 430c 0001 000d 0004 0000  ......C.........
+	0x0050:  0000 0f00 04c0 a800 0008 0002 0000 0900  ................
+	0x0060:  0200 000e 0001 0000 0000 0000 00         .............
+18:28:48.935899 IP6 wisp.local > fe80::de8d:8aff:fe1d:e2d2: ICMP6, neighbor solicitation, who has fe80::de8d:8aff:fe1d:e2d2, length 32
+

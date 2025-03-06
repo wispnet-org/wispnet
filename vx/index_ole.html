@@ -68,7 +68,7 @@
     }
 
     footer a:hover {
-      color: #f4f4f4; /* Slightly lighter white on hover */
+      color: rgba(244, 244, 244, 1); /* Slightly lighter white on hover */
     }
 
     footer div {
@@ -93,7 +93,7 @@
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: #f4f4f4;
+  background-color: rgba(244, 244, 244, 1);
   color: white;
   display: flex; /* Always keep it in the DOM */
   flex-direction: column;
@@ -170,8 +170,25 @@
     <h1>The VX Project</h1>
   </section>
   
-  <script>
-
+  <script> 
+   document.addEventListener("DOMContentLoaded", () => {
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      sidebar.classList.toggle("visible");
+    }
+  
+    document.getElementById("menuToggle").onclick = toggleSidebar;
+  
+    function showSection(sectionId, event) {
+      event.preventDefault();
+      const sections = document.querySelectorAll("section");
+      sections.forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(sectionId).classList.add('active');
+      toggleSidebar();
+    }
+  });
   </script>
 
   <footer>

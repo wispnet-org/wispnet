@@ -1,7 +1,16 @@
- document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
   function toggleSidebar() {
     const sidebar = document.getElementById("sidebar");
+    const menuToggle = document.getElementById("menuToggle");
+    
     sidebar.classList.toggle("visible");
+
+    // Change color based on sidebar visibility
+    if (sidebar.classList.contains("visible")) {
+      menuToggle.style.color = "black"; // Sidebar open → black icon
+    } else {
+      menuToggle.style.color = "white"; // Sidebar closed → white icon
+    }
   }
 
   document.getElementById("menuToggle").onclick = toggleSidebar;
