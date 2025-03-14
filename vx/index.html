@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="The WISPNET project is a quickly growing umbrella of all of the endeavors of WiSP and the WISPNET community.">
+  <meta name="description" content="The WISPNET's VX project is an open-source citizen-science weather research station.">
   <title>WISPNET – VX Project</title>
   <style>
     body, html {
@@ -25,6 +25,17 @@
       height: 100vh;
       text-align: center;
     }
+
+    #arrows {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    filter: invert(1);
+}
 
     h1 {
       font-size: 3em;
@@ -122,8 +133,25 @@
   <section id="main" class="active">
     <h1>The VX Project</h1>
     <h2>The open-source weather research station.</h2>
+    <div id="arrows">
+      <img src="fadetest/fadetest.svg" class="arrow" width="50">
+      <img src="fadetest/fadetest.svg" class="arrow" width="50">
+      <img src="fadetest/fadetest.svg" class="arrow" width="50">
+  </div>
   </section>
 
+  <script>
+    function fadeInArrows() {
+        const arrows = document.querySelectorAll('.arrow');
+        arrows.forEach((arrow, index) => {
+            setTimeout(() => {
+                arrow.style.opacity = 1;
+            }, index * 1000); // Delay each arrow by 1s
+        });
+    }
+    
+    window.onload = fadeInArrows;
+</script>
   <script src="sidebar.js"> </script>
 
   <script src="eclipseflow.js"></script>
