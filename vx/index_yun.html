@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The WISPNET's VX project is an open-source citizen-science weather research station.">
+  <title>WISPNET – VX Project</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+      font-family: Arial, sans-serif;
+      color: #000000;
+      height: 100%;
+    }
+
+    #main {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      flex-direction: column; /* Stack items vertically */
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    #arrows {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    filter: invert(1);
+}
+
+    h1 {
+      font-size: 3em;
+      color: white;
+      margin-bottom: 10px; /* Adjust the bottom margin to reduce space */
+    }
+
+    h2 {
+       font-size: 1em; 
+       color: white;
+       margin-top: 0; /* Remove any unwanted top margin */
+    }
+
+
+        /* Updated Sidebar Styling */
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(244, 244, 244, 1);
+  color: white;
+  display: flex; /* Always keep it in the DOM */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0; /* Start invisible */
+  pointer-events: none; /* Disable interactions when not visible */
+  transition: opacity 0.5s ease-in-out; /* Smooth fade effect */
+  z-index: 10;
+}
+
+#sidebar.visible {
+  opacity: 1;
+  pointer-events: auto; /* Enable interactions when visible */
+}
+
+
+    #sidebar a {
+      padding: 15px 20px;
+      text-decoration: none;
+      font-size: 2.5em;
+      color: #000;
+      display: block;
+      position: relative; /* To position the pseudo-element */
+      transition: color 0.5s;
+      text-align: center;
+    }
+
+    #sidebar a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px; /* Adjust the height of the underline */
+      background-color: #000;
+      transition: width 0.5s ease;
+    }
+
+    #sidebar a:hover::after {
+      width: 100%; /* Full width on hover */
+    }
+
+    #sidebar a:hover {
+      text-decoration: none; /* Remove default underline */
+    }
+
+    #menuToggle {
+      font-size: 2em;
+      color: #fff;
+      cursor: pointer;
+      position: fixed;
+      top: 15px;
+      left: 20px;
+      z-index: 11;
+    }
+
+  </style>
+</head>
+<body>
+    <div id="menuToggle" role="button" tabindex="0" aria-label="Toggle Menu">☰</div>
+    <div id="sidebar">
+      <a href="#main" onclick="showSection('main', event)">Home</a>
+      <a href="https://wisp.wispnet.org">Main</a>
+      <a href="https://wisp.wispnet.org/contact">Contact</a>
+      <a href="https://wisp.wispnet.org/IOserver">IOserver</a>
+      <a href="https://wisp.wispnet.org/TDP">TDP</a>
+      <a href="https://wisp.wispnet.org/TDP/Beta">Beta</a>
+      <a href="https://wisp.wispnet.org/resources">Resources</a>
+      <a href="https://wisp.wispnet.org/depreciated">Depreciated</a>
+  </div>
+
+  <section id="main" class="active">
+    <h1>The VX Project</h1>
+    <h2>The open-source weather research station.</h2>
+    <div id="arrows">
+      <img src="fadetest/fadetest.svg" class="arrow" width="50">
+      <img src="fadetest/fadetest.svg" class="arrow" width="50">
+      <img src="fadetest/fadetest.svg" class="arrow" width="50">
+  </div>
+  </section>
+
+  <script>
+    function fadeInArrows() {
+        const arrows = document.querySelectorAll('.arrow');
+        arrows.forEach((arrow, index) => {
+            setTimeout(() => {
+                arrow.style.opacity = 1;
+            }, index * 1000); // Delay each arrow by 1s
+        });
+    }
+    
+    window.onload = fadeInArrows;
+</script>
+  <script src="sidebar.js"> </script>
+
+  <script src="eclipseflow.js"></script>
+</body>
+</html>
