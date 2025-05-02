@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Matrix Rain</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+<canvas id="matrix"></canvas>
+<script>
+  const canvas = document.getElementById("matrix");
+  const ctx = canvas.getContext("2d");
+
+  // Handle high-DPI (Retina) screens
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = window.innerWidth * dpr;
+  canvas.height = window.innerHeight * dpr;
+  ctx.scale(dpr, dpr);
+  canvas.style.width = window.innerWidth + "px";
+  canvas.style.height = window.innerHeight + "px";
+
+  const fontSize = 10; // Smaller font size
+  const columns = Math.floor(window.innerWidth / fontSize);
+  const drops = Array(columns).fill(1);
+
+  ctx.font = `${fontSize}px monospace`;
+
+  function draw() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
+    ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+
+    for (let i = 0; i < drops.length; i++) {
+      const char = Math.random() > 0.5 ? "1" : "0";
+      const x = i * fontSize;
+      const y = drops[i] * fontSize;
+
+      // Occasionally use a brighter green
+      if (Math.random() < 0.03 && drops[i] > 1) {
+        ctx.fillStyle = "#b6ffb6";
+        ctx.fillText(char, x, y - fontSize);
+      }
+
+      ctx.fillStyle = "#0f0";
+      ctx.fillText(char, x, y);
+
+      // Reset or move drop
+      if (y > window.innerHeight || Math.random() > 0.995) {
+        drops[i] = 0;
+      }
+
+      drops[i] += 0.1; // Slower drop movement
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+</script>
+</body>
+</html>
