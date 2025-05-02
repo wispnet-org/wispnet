@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Canvas Page</title>
+</head>
+<body>
+  <<canvas id="topoCanvas"></canvas>
+
+  <script>
+  // Setup canvas
+  const canvas = document.getElementById('topoCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  
+  // Noise generation (simple pseudo-random smooth noise)
+  function generateNoise(width, height, scale) {
+    const noise = [];
+    for (let y = 0; y < height; y++) {
+      noise[y] = [];
+      for (let x = 0; x < width; x++) {
+        // Simple smooth value based on sin/cos for a "wavey" look
+        let value = (
+          Math.sin(x / scale) +
+          Math.cos(y / scale) +
+          Math.sin((x + y) / (scale * 1.5))
+        ) / 3;
+        noise[y][x] = value;
+      }
+    }
+    return noise;
+  }
+  
+  // Draw contours
+  function drawContours(noise, step, cellSize) {
+    const rows = noise.length;
+    const cols = noise[0].length;
+  
+    for (let level = -1; level <= 1; level += step) {
+      ctx.beginPath();
+      ctx.strokeStyle = 'rgba(255, 150, 150, 0.6)';
+      ctx.lineWidth = 1;
+  
+      for (let y = 0; y < rows - 1; y++) {
+        for (let x = 0; x < cols - 1; x++) {
+          const val = noise[y][x];
+          const nextVal = noise[y + 1][x + 1];
+          if ((val < level && nextVal > level) || (val > level && nextVal < level)) {
+            const px = x * cellSize;
+            const py = y * cellSize;
+            ctx.moveTo(px, py);
+            ctx.lineTo(px + cellSize, py + cellSize);
+          }
+        }
+      }
+  
+      ctx.stroke();
+    }
+  }
+  
+  // Generate and draw
+  const scale = 50;
+  const cellSize = 10;
+  const noise = generateNoise(canvas.width / cellSize, canvas.height / cellSize, scale);
+  drawContours(noise, 0.1, cellSize);
+  </script>
+  
+</body>
+</html>

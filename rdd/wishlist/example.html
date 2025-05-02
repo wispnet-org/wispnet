@@ -80,13 +80,122 @@
       color: #aaa;
     }
 
-    #main {
-      background-image: url('https://wisp.wispnet.org/resources/lightstreet_img(DSC_0338).JPG');
+   /* Wishlist colapsable styles section. */
+/* Main container */
+.main-container {
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  padding: 10px;
+}
+
+/* Style each collapsible item */
+.collapsible-item {
+  border: 1px solid #ccc;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the clickable header */
+.collapsible-header {
+  cursor: pointer;
+  background-color: #f0f0f0;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s ease;
+  position: relative; /* Provide relative context */
+}
+
+.collapsible-header::after {
+  content: '';
+  position: absolute; /* Use absolute positioning relative to .collapsible-header */
+  bottom: 0; /* Ensure it appears at the bottom of .collapsible-header */
+  left: 0;
+  width: 0; /* Start with no underline */
+  height: 2px;
+  background-color: #000000;
+  transition: width 0.3s ease;
+}
+
+.collapsible-header:hover::after {
+  width: 100%; /* Full width underline on hover */
+}
+
+
+/*.collapsible-header:hover {
+  background-color: #e0e0e0;
+} */
+
+.collapsible-header,
+.collapsible-content {
+  width: 50vw; /* Set width to 50% of the viewport */
+  margin: 0 auto; /* Center each section horizontally */
+  padding: 0.5rem; /* Add some padding for better visuals */
+  box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
+
+.collapsible-content {
+  display: block; /* Ensure the content stretches to the width */
+}
+
+/* Style the collapsible content */
+/* Add this section to modify the layout */
+.collapsible-content {
+  display: flex;
+  flex-direction: row; /* Align items horizontally */
+  align-items: flex-start; /* Align items at the top */
+  justify-content: flex-start; /* Align items to the left */
+  gap: 20px; /* Space between image and list */
+  padding: 10px;
+  max-height: 0; /* Start with collapsed content */
+  overflow: hidden; /* Hide content overflow */
+  transition: max-height 0.3s ease-out; /* Smooth transition for height change */
+}
+
+.collapsible-content img {
+  max-width: 150px; /* Set a fixed width for the image */
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add shadow */
+  margin-top: 0; /* Remove any extra margin at the top */
+}
+
+.collapsible-content ul {
+  display: block; /* Stack the list vertically */
+  padding-left: 0;
+  list-style: disc;
+  flex-grow: 1; /* Allow the list to take the remaining space */
+}
+
+.collapsible-content li {
+  font-size: 1em;
+  color: #555;
+  padding: 5px;
+}
+
+
+/* Add hover effects to each list item 
+.collapsible-content li:hover {
+  color: #4CAF50;
+} */
+
+/* Arrow toggle style */
+.toggle-arrow {
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+    #wishlist {
+      background-image: url('https://wisp.wispnet.org/resources/imgl/lightstreet_img(DSC_0338).JPG');
       background-size: cover;
       background-position: center;
     }
 
-    /* Updated Sidebar Styling */
+    /* Sidebar colapsable styles section. */
 #sidebar {
   position: fixed;
   top: 0;
@@ -166,12 +275,41 @@
   </div>
 
 
-  <section id="main" class="active">
-    <h1>Welcome to WISPNET</h1>
-    <p>The WISPNET project is a quickly growing umbrella of all of the endeavors of William "WiSP" S. Popovici and the WISPNET community </p>
-    <p></p>
-    <p>Explore all the different sites and features of the WISPNET sites, and feel free to give us feedback! A small community of web developers, we're always looking to improve our sites!</p>
+  <section id="wishlist" class="active">
+    <h1>Wishlist</h1>
+    <div class="collapsible">
+      <div class="collapsible-header">
+        <span>Raspberry Pi 5</span>
+        <button class="toggle-arrow">▼</button>
+      </div>
+      <div class="collapsible-content">
+        <ul>
+          <li>Raspberry Pi 5</li>
+          <li>Model B</li>
+          <li>8GB RAM</li>
+          <li>Supports 4K Display</li>
+        </ul>
+        <img src="https://assets.raspberrypi.com/static/c671804c05a51efc4e3c2a1bdcbafbcf/e8238/raspberry-pi-5.webp" alt="Raspberry Pi 5 Image">
+      </div>
+    </div>
+    <div class="collapsible">
+      <div class="collapsible-header">
+        <span>Fishman Acoustic Guitar Amp</span>
+        <button class="toggle-arrow">▼</button>
+      </div>
+      <div class="collapsible-content">
+        <ul>
+          <li>Fishman Acoustic Amp</li>
+          <li>Ideal for Acoustic Guitars</li>
+          <li>Portable</li>
+          <li>Clear Sound</li>
+        </ul>
+        <img src="https://example.com/fishman-amp.jpg" alt="Fishman Amp Image">
+      </div>
+    </div>
   </section>
+  
+    
   <script>
     function toggleSidebar() {
   const sidebar = document.getElementById("sidebar");
@@ -191,14 +329,30 @@
       toggleSidebar();
     }
   </script>
+  <script>
+document.querySelectorAll('.collapsible-header').forEach(header => {
+  header.addEventListener('click', () => {
+    const content = header.nextElementSibling; // The associated collapsible content
+    const arrow = header.querySelector('.toggle-arrow');
 
+    if (content.style.maxHeight) {
+      content.style.maxHeight = null; // Collapse
+      arrow.textContent = '▼';
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px"; // Expand
+      arrow.textContent = '▲';
+    }
+  });
+});
+  </script>
+  
   <footer>
     <div>
       <a href="https://github.com/wispgitgecko9/wispnet/" target="_blank">
         <img src="resources/logo/github/github-mark-white.svg" alt="GitHub">
       </a>
       <a href="https://discord.com" target="_blank">
-        <img src="resources/logo/discord/discord-mark-white.svg" alt="Discord">
+        <img src="../resources/logo/discord/discord-mark-white.svg" alt="Discord">
       </a>
       <a href="https://reddit.com/r/wispnet" target="_blank">
         <img src="resources/logo/reddit/Reddit_Icon_1Color_Silhouette-white.svg" alt="Discord">

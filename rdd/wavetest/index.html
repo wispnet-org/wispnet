@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Canvas Page</title>
+</head>
+<body>
+    <svg id="topoSVG" width="100%" height="100%" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" style="background:#111; display:block;">
+        <style>
+          path {
+            fill: none;
+            stroke: #f6c177; /* Soft gold */
+            stroke-width: 1.2;
+            opacity: 0.6;
+            transition: opacity 3s ease-out; /* Fade-out transition */
+          }
+        </style>
+      
+        <script type="application/ecmascript">
+          <![CDATA[
+          const svg = document.getElementById('topoSVG');
+          const width = 800;
+          const height = 600;
+          const layers = 20;
+          const spacing = 25;
+          const paths = [];
+          let offset = 0;
+          let fadeStartTime = null;  // Track the time when fade should start
+          const fadeDuration = 10000;  // Duration before fade starts (10 seconds)
+          let fadeInProgress = false;  // Track if fade-in is in progress
+
+          function createPaths() {
+            for (let i = 0; i < layers; i++) {
+              const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+              svg.appendChild(path);
+              paths.push(path);
+            }
+          }
+      
+          function updatePaths(offset) {
+            for (let i = 0; i < layers; i++) {
+              const layerOffset = i * spacing;
+              let d = "M 0 " + (layerOffset + 100);
+      
+              for (let x = 0; x <= width; x += 10) {
+                const y =
+                  layerOffset +
+                  100 +
+                  Math.sin((x + offset + i * 30) * 0.01) * 35 +
+                  Math.cos((x + offset + i * 15) * 0.005) * 15;
+                d += " L " + x + " " + y;
+              }
+      
+              paths[i].setAttribute("d", d);
+            }
+          }
+
+          function startFadeOut() {
+            paths.forEach((path) => {
+              path.style.opacity = '0'; // Fade out
+            });
+          }
+
+          function resetPaths() {
+            paths.forEach((path) => {
+              path.style.opacity = '0.6'; // Reset opacity for restart
+            });
+            offset = 0; // Reset the offset for restarting
+          }
+
+          createPaths();
+      
+          function animate(currentTime) {
+            if (!fadeStartTime) {
+              fadeStartTime = currentTime;  // Initialize the fadeStartTime on first frame
+            }
+
+            offset += 0.5; // Speed of the movement
+            
+            // When the lines move off-screen, they will come back on from the opposite side
+            if (offset > width) {
+              offset = -width; // Reset the offset to create the "flow back onto the screen" effect
+            }
+
+            updatePaths(offset);
+
+            // Fade-out after 10 seconds of animation
+            if (currentTime - fadeStartTime > fadeDuration && !fadeInProgress) {
+              fadeInProgress = true;
+              startFadeOut();
+              // Reset and start the animation again after fade-out completes
+              setTimeout(() => {
+                resetPaths();
+                fadeStartTime = currentTime; // Reset the fade timer
+                fadeInProgress = false; // Allow fade-in to happen again
+              }, 3000);  // Wait for fade-out to complete
+            }
+
+            requestAnimationFrame(animate);
+          }
+      
+          requestAnimationFrame(animate);
+          ]]>
+        </script>
+      </svg>
+</body>
+</html>
