@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Typing Animation</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f5f5f5;
+      font-family: monospace;
+      font-size: 2rem;
+    }
+    #typed-text {
+      white-space: pre;
+      border-right: 2px solid black;
+      padding-right: 5px;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+  </style>
+</head>
+<body>
+  <div id="typed-text"></div>
+
+  <script>
+    const text = "There is a tiny Sherlock Holmes embedded in your countertop.";
+    const target = document.getElementById("typed-text");
+    let index = 0;
+
+    function typeLetter() {
+      if (index < text.length) {
+        target.textContent += text[index];
+        index++;
+        setTimeout(typeLetter, 70);
+      }
+    }
+
+    window.onload = typeLetter;
+  </script>
+</body>
+</html>
