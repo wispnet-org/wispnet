@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WISPNET Binary Decoder</title>
+  <meta name="description" content="The simple binary decoder!.">
+  <link rel="icon" href="../../resources/icx/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../resources/icx/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../resources/icx/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../resources/icx/favicon-16x16.png">
+  <style>
+    :root {
+      --bg-color: #1e1e1e;
+      --text-color: #a8ff60;
+      --box-bg: #2a2a2a;
+      --border-color: #444;
+    }
+
+    .light-mode {
+      --bg-color: #f4f4f4;
+      --text-color: #2d4a2d;
+      --box-bg: #ffffff;
+      --border-color: #ccc;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Courier New', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      padding-top: 2rem;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .bit-input {
+      display: grid;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      justify-content: center;
+    }
+
+    .bit-row {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    .bit-box {
+      width: 2rem;
+      height: 2rem;
+      text-align: center;
+      font-size: 1.25rem;
+      background-color: var(--box-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      outline: none;
+    }
+
+    #output {
+      font-size: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .settings {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background-color: var(--box-bg);
+      border: 1px solid var(--border-color);
+      padding: 1rem;
+      border-radius: 8px;
+    }
+
+    .settings label {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    #clearButton {
+      margin-top: 1rem;
+      background-color: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #clearButton:hover {
+      background-color: var(--border-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="settings">
+    <label>
+      <input type="checkbox" id="modeToggle"  /> Light Mode
+    </label>
+    <label>
+      <input type="radio" name="bitLength" value="8" checked /> 8-bit
+    </label>
+    <label>
+      <input type="radio" name="bitLength" value="16" /> 16-bit
+    </label>
+  </div>
+
+  <div class="bit-input" id="bitInputContainer"></div>
+  <div id="output">Output: <span id="decodedText">(waiting for input)</span></div>
+  <button id="clearButton">Clear</button>
+
+  <script>
+    const bitInputContainer = document.getElementById('bitInputContainer');
+    const decodedText = document.getElementById('decodedText');
+    const modeToggle = document.getElementById('modeToggle');
+    const bitLengthRadios = document.querySelectorAll('input[name="bitLength"]');
+    const clearButton = document.getElementById('clearButton');
+    let bitBoxes = [];
+    let bitCount = 8;
+
+    function createBitInputs() {
+      bitInputContainer.innerHTML = '';
+      bitBoxes = [];
+      const rows = bitCount === 16 ? 2 : 1;
+      const bitsPerRow = bitCount / rows;
+
+      for (let r = 0; r < rows; r++) {
+        const rowDiv = document.createElement('div');
+        rowDiv.className = 'bit-row';
+
+        for (let i = 0; i < bitsPerRow; i++) {
+          const index = r * bitsPerRow + i;
+          const input = document.createElement('input');
+          input.setAttribute('maxlength', '1');
+          input.setAttribute('type', 'text');
+          input.classList.add('bit-box');
+          rowDiv.appendChild(input);
+          bitBoxes.push(input);
+
+          input.addEventListener('input', () => {
+            input.value = input.value.replace(/[^01]/g, '');
+            decodeBits();
+            if (input.value && index < bitCount - 1) {
+              bitBoxes[index + 1].focus();
+            }
+          });
+        }
+
+        bitInputContainer.appendChild(rowDiv);
+      }
+    }
+
+    function decodeBits() {
+      let binaryString = bitBoxes.map(box => box.value || '0').join('');
+      let output = '';
+      for (let i = 0; i < binaryString.length; i += 8) {
+        let byte = binaryString.slice(i, i + 8);
+        if (byte.length === 8) {
+          let charCode = parseInt(byte, 2);
+          output += String.fromCharCode(charCode);
+        }
+      }
+      decodedText.textContent = output || '(waiting for input)';
+    }
+
+    function clearInputs() {
+      bitBoxes.forEach(box => box.value = '');
+      decodedText.textContent = '(waiting for input)';
+      bitBoxes[0]?.focus();
+    }
+
+    modeToggle.addEventListener('change', () => {
+      document.body.classList.toggle('light-mode', modeToggle.checked);
+    });
+
+    bitLengthRadios.forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        bitCount = parseInt(e.target.value);
+        createBitInputs();
+      });
+    });
+
+    clearButton.addEventListener('click', clearInputs);
+
+    createBitInputs();
+  </script>
+</body>
+</html>
