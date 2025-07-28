@@ -25,3 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleSidebar();
   }
 });
+
+/*  
+    WISPNET Sidebar JavaScript by William S. Popovici
+    https://wispnet.org
+    © 2025 by William S. Popovici
+*/
