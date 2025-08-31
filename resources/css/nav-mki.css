@@ -1,0 +1,101 @@
+/* =========================
+   Modular Navbar CSS
+   Can be reused across projects
+========================= */
+
+/* Root color variables (optional, can be overridden) */
+:root {
+  --nav-primary: #4CAF50;
+  --nav-bg: #1e293b;
+  --nav-text: #ffffff;
+  --nav-radius: 12px;
+  --nav-transition: 0.3s ease;
+}
+
+/* Navbar container */
+.navbar {
+  background: var(--nav-bg);
+  color: var(--nav-text);
+  display: flex;
+  align-items: center;
+  justify-content: center; /* centers links on large screens */
+  padding: 0.75rem 1rem;
+  position: relative; /* needed for dropdown positioning */
+  font-family: sans-serif;
+}
+
+/* Navbar links list */
+.navbar ul {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar links */
+.navbar a {
+  color: var(--nav-text);
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-block;
+  transition: color var(--nav-transition);
+}
+
+.navbar a:hover {
+  color: var(--nav-primary);
+}
+
+/* Hamburger button */
+.navbar #menu-toggle {
+  display: none;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: var(--nav-text);
+  cursor: pointer;
+}
+
+/* =========================
+   Mobile styles
+========================= */
+@media (max-width: 768px) {
+  .navbar {
+    justify-content: space-between; /* hamburger left, links hidden by default */
+  }
+
+  .navbar #menu-toggle {
+    display: block;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 0;        /* collapsed by default */
+    overflow: hidden;
+    background: var(--nav-bg);
+    text-align: center;
+    transition: max-height var(--nav-transition);
+    padding: 0;
+  }
+
+  .navbar.active ul {
+    max-height: 500px;    /* expand to show all items */
+    padding: 1rem 0;
+  }
+
+  .navbar ul li {
+    padding: 0.5rem 0;
+  }
+
+  .navbar ul li a {
+    display: block;
+    width: 100%;
+  }
+}
+
+

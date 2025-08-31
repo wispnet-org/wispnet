@@ -1,0 +1,142 @@
+/* rev.css*/
+    :root {
+      --primary: #4CAF50;
+      --secondary: #1e293b;
+      --light: #f8fafc;
+      --muted: #64748b;
+      --radius: 12px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--light);
+      color: var(--secondary);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    header h1 { font-size: 2rem; font-weight: 600; }
+
+    /* Navigation */
+    nav {
+  background: var(--secondary);
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  position: relative; /* <-- add this */
+  justify-content: center; /* center the entire content on large screens */
+}
+
+/* Optional: keep the hamburger off to the side on mobile */
+@media (max-width: 768px) {
+  nav {
+    justify-content: space-between;
+  }
+}
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover { color: var(--primary); }
+
+    /* Hamburger button */
+#menu-toggle {
+  display: none;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+
+@media (max-width: 768px) {
+  nav ul {
+    max-height: 0;               /* start collapsed */
+    overflow: hidden;            /* hide content when collapsed */
+    flex-direction: column;
+    background: var(--secondary);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 0;                  /* remove padding for smooth height animation */
+    text-align: center;
+    transition: max-height 0.5s ease; /* smooth slide */
+  }
+
+  nav.active ul {
+    max-height: 500px;           /* large enough to show all items */
+    padding: 1rem 0;             /* restore padding when open */
+  }
+  
+  nav ul li {
+    padding: 0.5rem 0;
+  }
+
+  nav ul li a {
+    display: block;
+    width: 100%;
+  }
+
+  #menu-toggle {
+    display: block;
+  }
+}
+
+
+
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      display: grid;
+      gap: 2rem;
+    }
+
+    section {
+      background: white;
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    section h2 { margin-bottom: 0.5rem; font-weight: 600; }
+
+    a { color: var(--muted); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    footer {
+      background: var(--secondary);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+
+    footer a { color: var(--primary); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
