@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CSS Animation Test Suite + Controls</title>
+<style>
+:root {
+  --accent: #0ff;
+  --speed: 1;
+}
+body {
+  font-family: system-ui, sans-serif;
+  background:#111;
+  color:#eee;
+  display:grid;
+  gap:2rem;
+  justify-content:center;
+  padding:2rem;
+  text-align:center;
+}
+h1{color:var(--accent);margin-bottom:.5rem;text-transform:uppercase;}
+section{
+  background:#1b1b1b;
+  border-radius:12px;
+  padding:1.5rem;
+  box-shadow:0 0 12px rgba(0,0,0,.3);
+}
+
+/* ---- Control panel ---- */
+#controls{
+  position:sticky;top:0;background:#222;
+  padding:1rem;border-radius:12px;
+  display:flex;gap:1rem;align-items:center;justify-content:center;
+  box-shadow:0 0 10px rgba(0,0,0,.4);
+}
+label{font-size:.9rem;}
+input[type="range"]{width:120px;}
+button{cursor:pointer;border:none;border-radius:8px;padding:.4rem .8rem;}
+#pauseBtn{background:#333;color:#fff;}
+
+/* ---- Animations ---- */
+.fade{opacity:0;animation:fadeIn calc(600ms/var(--speed)) ease forwards;}
+@keyframes fadeIn{to{opacity:1;}}
+
+.slide-up{transform:translateY(12px);opacity:0;animation:slideUp calc(500ms/var(--speed)) cubic-bezier(.2,.8,.2,1) forwards;}
+@keyframes slideUp{to{transform:translateY(0);opacity:1;}}
+
+.spinner{width:48px;height:48px;border-radius:50%;border:4px solid rgba(255,255,255,.1);border-top-color:var(--accent);
+animation:spin calc(900ms/var(--speed)) linear infinite;margin:auto;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+.pulse{padding:.6rem 1.2rem;border:none;border-radius:8px;background:var(--accent);color:#000;
+animation:pulse calc(1.2s/var(--speed)) ease-in-out infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.06);opacity:.85;}}
+
+.bounce{display:inline-block;animation:bounce calc(800ms/var(--speed)) cubic-bezier(.2,.8,.3,1) infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0);}30%{transform:translateY(-18px);}50%{transform:translateY(0);}70%{transform:translateY(-8px);}}
+
+.shake{display:inline-block;animation:shake calc(1.2s/var(--speed)) infinite;}
+@keyframes shake{10%,90%{transform:translateX(-6px);}20%,80%{transform:translateX(6px);}30%,50%,70%{transform:translateX(-3px);}40%,60%{transform:translateX(3px);}}
+
+.card{width:200px;height:120px;perspective:1000px;margin:auto;}
+.card__inner{width:100%;height:100%;transition:transform 600ms;transform-style:preserve-3d;}
+.card:hover .card__inner{transform:rotateY(180deg);}
+.card__front,.card__back{position:absolute;width:100%;height:100%;backface-visibility:hidden;display:flex;align-items:center;justify-content:center;border-radius:8px;font-weight:700;}
+.card__front{background:#222;color:#fff;}
+.card__back{background:#ffd;color:#111;transform:rotateY(180deg);}
+
+.neon{font-weight:800;letter-spacing:4px;animation:glow calc(1.8s/var(--speed)) ease-in-out infinite;color:#fff;}
+@keyframes glow{0%,100%{text-shadow:0 0 6px var(--accent),0 0 18px rgba(0,255,255,.25);}50%{text-shadow:0 0 18px var(--accent),0 0 36px rgba(0,255,255,.45);}}
+
+.typewriter span{display:inline-block;white-space:nowrap;overflow:hidden;border-right:.14em solid currentColor;
+animation:typing calc(2.6s/var(--speed)) steps(18,end) infinite alternate,blink .7s step-end infinite;width:0;}
+@keyframes typing{to{width:14ch;}}
+@keyframes blink{50%{border-color:transparent;}}
+
+.grad{padding:1rem 2rem;color:#fff;border-radius:10px;font-weight:700;
+background:linear-gradient(90deg,var(--accent),#60f,#0bf);
+background-size:300% 100%;animation:gradShift calc(6s/var(--speed)) linear infinite;}
+@keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+.ripple{position:relative;overflow:hidden;padding:.6rem 1.2rem;border:none;background:#444;color:#fff;border-radius:8px;}
+.ripple__wave{position:absolute;border-radius:50%;transform:scale(0);background:rgba(255,255,255,0.2);pointer-events:none;animation:ripple 700ms linear forwards;}
+@keyframes ripple{to{transform:scale(4);opacity:0;}}
+
+svg{display:block;margin:auto;}
+</style>
+</head>
+<body>
+
+<!-- Control panel -->
+<div id="controls">
+  <label>Speed&nbsp;<input type="range" id="speedRange" min="0.25" max="2" value="1" step="0.05"></label>
+  <label>Accent&nbsp;<input type="color" id="accentColor" value="#00ffff"></label>
+  <button id="pauseBtn">Pause</button>
+</div>
+
+<!-- Demo sections -->
+<section><h1>Fade In</h1><div class="fade">Fade In Element</div></section>
+<section><h1>Slide Up</h1><div class="slide-up">Sliding Up Text</div></section>
+<section><h1>Spinner</h1><div class="spinner"></div></section>
+<section><h1>Pulse</h1><button class="pulse">Pulse</button></section>
+<section><h1>Bounce</h1><div class="bounce">Bounce</div></section>
+<section><h1>Shake</h1><div class="shake">Shake</div></section>
+<section><h1>Flip Card</h1>
+  <div class="card"><div class="card__inner"><div class="card__front">Front</div><div class="card__back">Back</div></div></div>
+</section>
+<section><h1>Neon</h1><div class="neon">NEON</div></section>
+<section><h1>Typewriter</h1><div class="typewriter"><span>Typing effect</span></div></section>
+<section><h1>Gradient</h1><div class="grad">Gradient Motion</div></section>
+<section><h1>Ripple</h1><button class="ripple">Click Me</button></section>
+<section><h1>SVG Morph</h1>
+<svg viewBox="0 0 100 100" width="120" height="120">
+  <path id="p" d="M10,50 C20,10 80,10 90,50 C80,90 20,90 10,50 Z" fill="var(--accent)"></path>
+</svg>
+</section>
+
+<script>
+/* Ripple effect */
+document.querySelectorAll('.ripple').forEach(btn=>{
+  btn.addEventListener('click',e=>{
+    const r=document.createElement('span');
+    r.className='ripple__wave';
+    const rect=btn.getBoundingClientRect();
+    const size=Math.max(rect.width,rect.height);
+    r.style.width=r.style.height=size+'px';
+    r.style.left=(e.clientX-rect.left-size/2)+'px';
+    r.style.top=(e.clientY-rect.top-size/2)+'px';
+    btn.appendChild(r);
+    r.addEventListener('animationend',()=>r.remove());
+  });
+});
+
+/* SVG morph */
+const path=document.getElementById('p');
+const from="M10,50 C20,10 80,10 90,50 C80,90 20,90 10,50 Z";
+const to="M50,10 C80,20 80,80 50,90 C20,80 20,20 50,10 Z";
+const morphAnim=path.animate([{d:from},{d:to},{d:from}],{duration:1800,iterations:Infinity,easing:'ease-in-out'});
+
+/* Controls */
+const speedRange=document.getElementById('speedRange');
+const accentColor=document.getElementById('accentColor');
+const pauseBtn=document.getElementById('pauseBtn');
+let paused=false;
+
+speedRange.addEventListener('input',()=>document.documentElement.style.setProperty('--speed',speedRange.value));
+accentColor.addEventListener('input',()=>document.documentElement.style.setProperty('--accent',accentColor.value));
+
+pauseBtn.addEventListener('click',()=>{
+  paused=!paused;
+  document.querySelectorAll('*').forEach(el=>el.style.animationPlayState=paused?'paused':'running');
+  morphAnim.playbackRate=paused?0:1;
+  pauseBtn.textContent=paused?'Resume':'Pause';
+});
+</script>
+</body>
+</html>
