@@ -5,7 +5,8 @@
 ##### The **WISPNET** project started out as an experimental Local Area Network (LAN.) The project has since expanded to much more than just networking, and now includes the following projects:
 ---
 - **The VX Project**: The *VX Project* is a centralized network of temparture, rain, and wind sensors for citizen-science research. This project is still under development.
-- **Project Fiveboard**: *`REDACTED FOR SECURITY`*
+- **Project Fiveboard**: *Single-handed five key keyboard.*
+- **gettemp project**: Shorter CPU temperature retrieval command for Raspberry Pi boards.
 ---
 ###### The following *"First Age Projects"* originated in the early days of the **WISPNET**:
 - ###### **Repairing and utilizing technology**: To explore and experiment with modern and older networking technologies and systems.
