@@ -29,5 +29,5 @@ document.addEventListener("DOMContentLoaded", () => {
 /*  
     WISPNET Sidebar JavaScript by William S. Popovici
     https://wispnet.org
-    © 2025 by William S. Popovici
+    © 2024—2026 by William S. Popovici
 */
