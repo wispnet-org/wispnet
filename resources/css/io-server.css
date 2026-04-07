@@ -1,0 +1,133 @@
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+      font-family: Arial, sans-serif;
+      color: #f4f4f4;
+      height: 100%; /* Ensures full height layout */
+    }
+
+    section {
+      height: 100vh;
+      display: none; /* Hide all sections by default */
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    section.active {
+      display: flex; /* Show the active section */
+    }
+
+    h1 {
+      font-size: 3em;
+      margin: 0;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    p {
+      font-size: 1.5em;
+      margin: 10px 0;
+      max-width: 600px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    a {
+      font-size: 2em;
+      margin: 10px 0;
+      max-width: 600px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      color: #f4f4f4;
+      text-decoration: none;
+      opacity: 0.8;
+      transition: 0.3s;
+    }
+
+    a:hover {
+      background-color: #575757;
+      opacity: 1;
+    }
+
+    .logo-container {
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 3;
+    }
+
+    .logo-container img {
+      width: 64px;
+      height: 64px;
+    }
+
+    #sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(51, 51, 51, 0.8);
+      color: white;
+      padding-top: 60px;
+      z-index: 2;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0; /* Start hidden */
+      transition: opacity 0.3s ease-in-out; /* Smooth fade effect */
+    }
+
+    #sidebar.visible {
+      opacity: 1; /* Fully visible when active */
+    }
+
+    #sidebar a {
+      padding: 15px 20px;
+      text-decoration: none;
+      font-size: 2.5em;
+      color: #f4f4f4;
+      display: block;
+      transition: 0.3s;
+      text-align: center;
+    }
+
+    #sidebar a:hover {
+      background-color: #575757;
+    }
+
+    #menuToggle {
+      font-size: 2em;
+      color: #f4f4f4;
+      cursor: pointer;
+      position: fixed;
+      top: 15px;
+      left: 20px;
+      z-index: 3;
+    }
+
+    #welcome {
+      background: url('https://wisp.wispnet.org/resources/imgl/redlight-trainyard_img(DSC_0157).JPG') no-repeat center;
+      background-size: cover;
+    }
+
+    #about {
+      background: url('https://wisp.wispnet.org/resources/imgl/trainrun_img(IMG_0936).jpeg') no-repeat center;
+      background-size: cover;
+    }
+
+    #pong {
+      background: url('https://wisp.wispnet.org/resources/pngl/pong.png') no-repeat center;
+      background-size: cover;
+    }
+
+    #maze {
+      background-size: cover;
+      background-color: #333;
+    }
