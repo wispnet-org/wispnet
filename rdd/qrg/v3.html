@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code Generator with Logo</title>
+  <script src="https://unpkg.com/qr-code-styling@1.9.2/lib/qr-code-styling.js"></script>
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      text-align: center; 
+      padding: 40px; 
+      background: #f8f9fa; 
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    input, button, select { 
+      padding: 12px; 
+      margin: 8px; 
+      font-size: 16px; 
+      border-radius: 6px;
+    }
+    button {
+      background: #face00;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover { background: #655977; }
+    
+    .preview-box {
+      margin: 30px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      display: inline-block;
+    }
+    #previewContainer {
+      border: 2px solid #eee;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .controls {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      text-align: left;
+      margin: 30px auto;
+      max-width: 900px;
+    }
+    .section {
+      margin-bottom: 25px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #eee;
+    }
+    .section:last-child { border-bottom: none; }
+    .section h3 {
+      margin: 0 0 12px 0;
+      font-size: 18px;
+      color: #333;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #444;
+    }
+    input[type="color"] {
+      width: 80px;
+      height: 50px;
+      padding: 4px;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    input[type="range"] {
+      width: 100%;
+    }
+    .value {
+      font-family: monospace;
+      background: #f0f0f0;
+      padding: 4px 10px;
+      border-radius: 4px;
+      display: inline-block;
+      min-width: 50px;
+      text-align: center;
+    }
+    .download-section {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <h1>QR Code Generator with Logo + Full Styling Controls</h1>
+  
+  <input type="text" id="text" placeholder="Enter URL or text" value="https://example.com" style="width: 520px;">
+  <br>
+  <input type="file" id="logoUpload" accept="image/*">
+  
+  <br><br>
+  <button onclick="generateQR()">Generate QR Code</button>
+
+  <!-- LIVE PREVIEW -->
+  <div id="previewSection" style="display: none;">
+    <div class="preview-box">
+      <h2>Live Preview <span style="font-size:14px; color:#666; font-weight:normal;">(650 × 650 px)</span></h2>
+      <div id="previewContainer"></div>
+    </div>
+  </div>
+
+  <!-- FULL CONTROLS -->
+  <div id="controls" class="controls" style="display: none;">
+    
+    <div class="section">
+      <h3>Dots &amp; Background</h3>
+      <div class="grid">
+        <div>
+          <label>Dot Style</label>
+          <select id="dotType">
+            <option value="square">Square</option>
+            <option value="rounded" selected>Rounded</option>
+            <option value="extra-rounded">Extra Rounded</option>
+            <option value="dots">Dots</option>
+            <option value="classy">Classy</option>
+            <option value="classy-rounded">Classy Rounded</option>
+          </select>
+        </div>
+        <div>
+          <label>Dot Color</label>
+          <input type="color" id="dotColor" value="#000000">
+        </div>
+        <div>
+          <label>Background Color</label>
+          <input type="color" id="bgColor" value="#ffffff">
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Corner Styles</h3>
+      <div class="grid">
+        <div>
+          <label>Corner Squares</label>
+          <select id="cornerSquareType">
+            <option value="square" selected>Square</option>
+            <option value="rounded">Rounded</option>
+            <option value="extra-rounded">Extra Rounded</option>
+            <option value="dots">Dots</option>
+            <option value="classy">Classy</option>
+            <option value="classy-rounded">Classy Rounded</option>
+            <option value="dot">Dot</option>
+          </select>
+        </div>
+        <div>
+          <label>Corner Dots</label>
+          <select id="cornerDotType">
+            <option value="dot" selected>Dot</option>
+            <option value="square">Square</option>
+            <option value="rounded">Rounded</option>
+            <option value="extra-rounded">Extra Rounded</option>
+            <option value="dots">Dots</option>
+            <option value="classy">Classy</option>
+            <option value="classy-rounded">Classy Rounded</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Logo Settings</h3>
+      <div class="grid">
+        <div>
+          <label>Logo Size <span id="logoSizeValue" class="value">0.28</span></label>
+          <input type="range" id="logoSize" min="0.15" max="0.40" step="0.01" value="0.28">
+        </div>
+        <div>
+          <label>Logo Margin (px)</label>
+          <input type="number" id="logoMargin" value="15" style="width: 120px;">
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" id="hideDots" checked>
+            Hide dots behind logo
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Layout</h3>
+      <div class="grid">
+        <div>
+          <label>Margin around QR code (px)</label>
+          <input type="number" id="qrMargin" value="20" style="width: 120px;">
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top: 20px;">
+      <button onclick="resetToDefaults()">Reset to Default Style</button>
+    </div>
+  </div>
+
+  <!-- DOWNLOAD BUTTONS -->
+  <div id="downloadSection" class="download-section" style="display: none;">
+    <button onclick="downloadQRpng()" style="font-size:18px; padding: 16px 32px;">Download PNG (1600×1600)</button>
+    <button onclick="downloadQRsvg()" style="font-size:18px; padding: 16px 32px;">Download SVG (Scalable)</button>
+  </div>
+
+  <script>
+    let qrCode = null;
+    let currentLogoUrl = null;
+    const PREVIEW_SIZE = 650;
+    const DOWNLOAD_SIZE = 1600;
+
+    // Build current options from form values
+    function getCurrentOptions(isDownload = false) {
+      const size = isDownload ? DOWNLOAD_SIZE : PREVIEW_SIZE;
+      const type = isDownload && isDownload === "png" ? "canvas" : "svg";
+
+      const opts = {
+        width: size,
+        height: size,
+        type: type,
+        data: document.getElementById("text").value.trim() || "https://example.com",
+        errorCorrectionLevel: "H",
+        margin: parseInt(document.getElementById("qrMargin").value) || 20,
+
+        dotsOptions: {
+          color: document.getElementById("dotColor").value,
+          type: document.getElementById("dotType").value
+        },
+
+        backgroundOptions: {
+          color: document.getElementById("bgColor").value
+        },
+
+        cornersSquareOptions: {
+          type: document.getElementById("cornerSquareType").value,
+          color: document.getElementById("dotColor").value   // same color as dots
+        },
+
+        cornersDotOptions: {
+          type: document.getElementById("cornerDotType").value,
+          color: document.getElementById("dotColor").value   // same color as dots
+        },
+
+        imageOptions: {
+          crossOrigin: "anonymous",
+          margin: parseInt(document.getElementById("logoMargin").value) || 15,
+          imageSize: parseFloat(document.getElementById("logoSize").value),
+          hideBackgroundDots: document.getElementById("hideDots").checked
+        }
+      };
+
+      if (currentLogoUrl) opts.image = currentLogoUrl;
+
+      return opts;
+    }
+
+    // Create or fully regenerate the preview QR
+    async function generateQR() {
+      const text = document.getElementById("text").value.trim();
+      if (!text) {
+        alert("Please enter some text or URL");
+        return;
+      }
+
+      // Clear old preview
+      const container = document.getElementById("previewContainer");
+      container.innerHTML = "";
+
+      const options = getCurrentOptions(false);
+      qrCode = new QRCodeStyling(options);
+      qrCode.append(container);
+
+      // Show everything
+      document.getElementById("previewSection").style.display = "block";
+      document.getElementById("controls").style.display = "block";
+      document.getElementById("downloadSection").style.display = "block";
+
+      // Attach live update listeners (only once)
+      attachLiveListeners();
+    }
+
+    // Live updates for all styling controls
+    function attachLiveListeners() {
+      const elements = [
+        "dotType", "cornerSquareType", "cornerDotType",
+        "dotColor", "bgColor",
+        "hideDots", "qrMargin", "logoMargin"
+      ];
+
+      elements.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const event = (id === "dotColor" || id === "bgColor") ? "input" : "change";
+        el.addEventListener(event, updatePreview);
+      });
+
+      // Logo size slider + live value display
+      const logoSlider = document.getElementById("logoSize");
+      const logoValue = document.getElementById("logoSizeValue");
+      logoSlider.addEventListener("input", () => {
+        logoValue.textContent = parseFloat(logoSlider.value).toFixed(2);
+        updatePreview();
+      });
+
+      // Text input (debounced)
+      let debounceTimer;
+      document.getElementById("text").addEventListener("input", () => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(updatePreview, 350);
+      });
+    }
+
+    // Update the live preview without recreating the whole object
+    function updatePreview() {
+      if (!qrCode) return;
+      const options = getCurrentOptions(false);
+      qrCode.update(options);
+    }
+
+    // Logo upload (auto-update if already generated)
+    document.getElementById("logoUpload").addEventListener("change", function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+          currentLogoUrl = ev.target.result;
+          if (qrCode) {
+            updatePreview();           // live update
+          } else {
+            generateQR();              // first time
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Downloads — always ultra-high resolution
+    function downloadQRpng() {
+      if (!qrCode) return;
+      const options = getCurrentOptions(true);
+      options.type = "canvas";                    // best for PNG
+      const tempQR = new QRCodeStyling(options);
+      tempQR.download({ name: "qr-with-logo", extension: "png" });
+    }
+
+    function downloadQRsvg() {
+      if (!qrCode) return;
+      const options = getCurrentOptions(true);
+      options.type = "svg";
+      const tempQR = new QRCodeStyling(options);
+      tempQR.download({ name: "qr-with-logo", extension: "svg" });
+    }
+
+    // Reset all styling controls to clean defaults
+    function resetToDefaults() {
+      document.getElementById("dotType").value = "rounded";
+      document.getElementById("dotColor").value = "#000000";
+      document.getElementById("bgColor").value = "#ffffff";
+      document.getElementById("cornerSquareType").value = "square";
+      document.getElementById("cornerDotType").value = "dot";
+      document.getElementById("logoSize").value = 0.28;
+      document.getElementById("logoSizeValue").textContent = "0.28";
+      document.getElementById("logoMargin").value = 15;
+      document.getElementById("hideDots").checked = true;
+      document.getElementById("qrMargin").value = 20;
+
+      if (qrCode) updatePreview();
+    }
+
+    // Optional: generate once on load
+    window.onload = () => generateQR();
+  </script>
+</body>
+</html>

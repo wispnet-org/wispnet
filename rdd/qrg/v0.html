@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code with Logo - Pure HTML/JS</title>
+  <script src="https://unpkg.com/qr-code-styling@1.6.0-rc.1/lib/qr-code-styling.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 40px; background: #f8f9fa; }
+    #canvas { margin: 20px auto; display: block; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    input, button { padding: 10px; margin: 8px; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <h1>QR Code Generator with Logo (Client-side only)</h1>
+  
+  <input type="text" id="text" placeholder="Enter URL or text" value="https://example.com" style="width: 400px;">
+  <br>
+  <input type="file" id="logoUpload" accept="image/*">
+  <br>
+  <button onclick="generateQR()">Generate QR Code</button>
+  
+  <div id="container"></div>
+  <button id="downloadBtn" style="display:none;" onclick="downloadQRpng()">Download PNG</button>
+  <button id="downloadBtn" style="display:none;" onclick="downloadQRsvg()">Download SVG</button>
+  <script>
+    let qrCode = null;
+    let currentLogoUrl = null;
+
+  async function generateQR() {
+  const text = document.getElementById("text").value.trim();
+  if (!text) {
+    alert("Please enter some text or URL");
+    return;
+  }
+
+  document.getElementById("container").innerHTML = "";
+
+  const options = {
+    width: 1200,
+    height: 1200,
+    type: "svg",                    // Better for quality
+    data: text,
+    errorCorrectionLevel: "H",
+    margin: 20,
+
+    dotsOptions: {
+      color: "#000000",
+      type: "square"
+    },
+
+    backgroundOptions: {
+      color: "#ffffff"
+    },
+
+    imageOptions: {
+      crossOrigin: "anonymous",
+      margin: 20,
+      imageSize: 0.28,              // Adjust between 0.2 and 0.35
+      hideBackgroundDots: true
+    }
+  };
+
+  if (currentLogoUrl) {
+    options.image = currentLogoUrl;
+  }
+
+  qrCode = new QRCodeStyling(options);
+  qrCode.append(document.getElementById("container"));
+  document.getElementById("downloadBtn").style.display = "inline-block";
+}
+
+    // Handle logo upload
+    document.getElementById("logoUpload").addEventListener("change", function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+          currentLogoUrl = ev.target.result;  // data URL
+          generateQR();                       // auto-regenerate
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    function downloadQRpng() {
+      if (qrCode) {
+        qrCode.download({ name: "qr-with-logo", extension: "png" });
+      }
+    }
+    function downloadQRsvg() {
+  if (qrCode) {
+    qrCode.download({ 
+      name: "qr-with-logo", 
+      extension: "svg"
+    });
+  }
+}
+
+    // Generate once on load
+    window.onload = () => generateQR();
+  </script>
+</body>
+</html>
