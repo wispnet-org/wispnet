@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Retro Open World</title>
+  <style>
+    body { margin: 0; background: black; }
+    canvas {
+      display: block;
+      margin: auto;
+      image-rendering: pixelated;
+      border: 2px solid #333;
+    }
+  </style>
+</head>
+<body>
+<canvas id="game" width="640" height="480"></canvas>
+
+<script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+const TILE_SIZE = 16;
+const WORLD_SIZE = 200;
+
+let keys = {};
+document.addEventListener("keydown", e => keys[e.key] = true);
+document.addEventListener("keyup", e => keys[e.key] = false);
+
+// Generate world
+let world = [];
+for (let y = 0; y < WORLD_SIZE; y++) {
+  world[y] = [];
+  for (let x = 0; x < WORLD_SIZE; x++) {
+    let r = Math.random();
+    if (r < 0.1) world[y][x] = "water";
+    else if (r < 0.2) world[y][x] = "sand";
+    else world[y][x] = "grass";
+  }
+}
+
+// Player
+let player = {
+  x: WORLD_SIZE / 2,
+  y: WORLD_SIZE / 2,
+  speed: 0.1
+};
+
+// Camera
+let camera = {
+  x: 0,
+  y: 0
+};
+
+function update() {
+  if (keys["ArrowUp"] || keys["w"]) player.y -= player.speed;
+  if (keys["ArrowDown"] || keys["s"]) player.y += player.speed;
+  if (keys["ArrowLeft"] || keys["a"]) player.x -= player.speed;
+  if (keys["ArrowRight"] || keys["d"]) player.x += player.speed;
+
+  camera.x = player.x - canvas.width / (2 * TILE_SIZE);
+  camera.y = player.y - canvas.height / (2 * TILE_SIZE);
+}
+
+function drawTile(type, x, y) {
+  if (type === "grass") ctx.fillStyle = "#3cb043";
+  if (type === "water") ctx.fillStyle = "#1e90ff";
+  if (type === "sand") ctx.fillStyle = "#e4d96f";
+
+  ctx.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  let startX = Math.floor(camera.x);
+  let startY = Math.floor(camera.y);
+
+  for (let y = 0; y < canvas.height / TILE_SIZE + 2; y++) {
+    for (let x = 0; x < canvas.width / TILE_SIZE + 2; x++) {
+      let worldX = startX + x;
+      let worldY = startY + y;
+
+      if (world[worldY] && world[worldY][worldX]) {
+        drawTile(
+          world[worldY][worldX],
+          (x - (camera.x % 1)) * TILE_SIZE,
+          (y - (camera.y % 1)) * TILE_SIZE
+        );
+      }
+    }
+  }
+
+  // Draw player
+  ctx.fillStyle = "red";
+  ctx.fillRect(
+    canvas.width / 2 - TILE_SIZE / 2,
+    canvas.height / 2 - TILE_SIZE / 2,
+    TILE_SIZE,
+    TILE_SIZE
+  );
+}
+
+function gameLoop() {
+  update();
+  draw();
+  requestAnimationFrame(gameLoop);
+}
+
+gameLoop();
+</script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Retro Open World RPG V2</title>
+  <style>
+    body { margin: 0; background: black; }
+    canvas {
+      display: block;
+      margin: auto;
+      image-rendering: pixelated;
+      border: 2px solid #333;
+    }
+  </style>
+</head>
+<body>
+<canvas id="game" width="640" height="480"></canvas>
+
+<script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+const TILE = 16;
+const SIZE = 160;
+
+let keys = {};
+document.addEventListener("keydown", e => keys[e.key.toLowerCase()] = true);
+document.addEventListener("keyup", e => keys[e.key.toLowerCase()] = false);
+
+// ---------------- WORLD ----------------
+
+function height(x,y){
+  let cx = x/SIZE - 0.5;
+  let cy = y/SIZE - 0.5;
+  let dist = Math.sqrt(cx*cx + cy*cy);
+
+  return (Math.sin(x*0.07)+Math.cos(y*0.07))*0.6 - dist*1.5 + Math.random()*0.2;
+}
+
+let world = [];
+let trees = [];
+let rocks = [];
+let builds = [];
+
+for(let y=0;y<SIZE;y++){
+  world[y]=[];
+  for(let x=0;x<SIZE;x++){
+    let h = height(x,y);
+
+    if(h < -0.5) world[y][x] = "water";
+    else if(h < -0.2) world[y][x] = "sand";
+    else world[y][x] = "grass";
+
+    // trees
+    if(world[y][x]==="grass" && Math.random()<0.08){
+      trees.push({x,y,hp:3});
+    }
+
+    // rocks
+    if(world[y][x]==="grass" && Math.random()<0.04){
+      rocks.push({x,y,hp:5});
+    }
+  }
+}
+
+// ---------------- PLAYER ----------------
+
+function findSpawn(){
+  for(let t of trees){
+    return {x:t.x,y:t.y};
+  }
+  return {x:80,y:80};
+}
+
+let spawn = findSpawn();
+
+let player = {
+  x: spawn.x,
+  y: spawn.y,
+  hp: 100,
+  stamina: 100,
+  inv: {wood:0, stone:0}
+};
+
+// ---------------- ENEMIES ----------------
+
+let enemies = Array.from({length:10},()=>({
+  x:Math.random()*SIZE,
+  y:Math.random()*SIZE,
+  hp:20
+}));
+
+// ---------------- HELPERS ----------------
+
+function tileAt(x,y){
+  return world[Math.floor(y)]?.[Math.floor(x)];
+}
+
+function walkable(x,y){
+  let t = tileAt(x,y);
+  return t && t !== "water";
+}
+
+function dist(a,b){
+  return Math.hypot(a.x-b.x,a.y-b.y);
+}
+
+// ---------------- GAMEPLAY ----------------
+
+let buildMode = false;
+
+function update(){
+
+  // toggle build mode
+  if(keys["b"]){
+    buildMode = !buildMode;
+    keys["b"] = false;
+  }
+
+  let speed = 0.12;
+
+  let sprint = keys["shift"] && player.stamina>0;
+  if(sprint){
+    speed = 0.2;
+    player.stamina -= 0.6;
+  } else {
+    player.stamina += 0.3;
+  }
+  player.stamina = Math.max(0,Math.min(100,player.stamina));
+
+  let dx=0,dy=0;
+  if(keys["w"]) dy-=speed;
+  if(keys["s"]) dy+=speed;
+  if(keys["a"]) dx-=speed;
+  if(keys["d"]) dx+=speed;
+
+  let nx = player.x+dx;
+  let ny = player.y+dy;
+
+  if(walkable(nx,player.y)) player.x=nx;
+  if(walkable(player.x,ny)) player.y=ny;
+
+  // regen if safe
+  let safe = enemies.every(e => dist(e,player)>6);
+  if(safe && player.hp<100) player.hp += 0.05;
+
+  // enemies
+  enemies.forEach(e=>{
+    let d = dist(e,player);
+    if(d<8){
+      e.x += (player.x-e.x)/d*0.06;
+      e.y += (player.y-e.y)/d*0.06;
+    }
+    if(d<0.8) player.hp -= 0.2;
+  });
+
+  // ATTACK / HARVEST
+  if(keys[" "]){
+    // trees
+    trees.forEach(t=>{
+      if(dist(t,player)<1.5){
+        t.hp--;
+        player.inv.wood++;
+      }
+    });
+
+    // rocks
+    rocks.forEach(r=>{
+      if(dist(r,player)<1.5){
+        r.hp--;
+        player.inv.stone++;
+      }
+    });
+
+    enemies.forEach(e=>{
+      if(dist(e,player)<1.5){
+        e.hp -= 5;
+      }
+    });
+
+    keys[" "] = false;
+  }
+
+  trees = trees.filter(t=>t.hp>0);
+  rocks = rocks.filter(r=>r.hp>0);
+  enemies = enemies.filter(e=>e.hp>0);
+
+  // BUILD
+  if(keys["q"] && player.inv.wood>0){
+    builds.push({x:player.x+1,y:player.y});
+    player.inv.wood--;
+    keys["q"]=false;
+  }
+}
+
+// ---------------- DRAW ----------------
+
+function drawTile(t,x,y){
+  if(t==="grass") ctx.fillStyle="#3cb043";
+  if(t==="sand") ctx.fillStyle="#e4d96f";
+  if(t==="water") ctx.fillStyle="#1e90ff";
+  ctx.fillRect(x,y,TILE,TILE);
+}
+
+let time=0;
+
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  let camX = player.x - canvas.width/(2*TILE);
+  let camY = player.y - canvas.height/(2*TILE);
+
+  for(let y=0;y<canvas.height/TILE+2;y++){
+    for(let x=0;x<canvas.width/TILE+2;x++){
+      let wx=Math.floor(camX+x);
+      let wy=Math.floor(camY+y);
+      let t=world[wy]?.[wx];
+      if(t){
+        drawTile(t,(x-(camX%1))*TILE,(y-(camY%1))*TILE);
+      }
+    }
+  }
+
+  function drawE(x,y,c){
+    ctx.fillStyle=c;
+    ctx.fillRect((x-camX)*TILE,(y-camY)*TILE,TILE,TILE);
+  }
+
+  // objects
+  trees.forEach(t=>drawE(t.x,t.y,"#0b6623"));
+  rocks.forEach(r=>drawE(r.x,r.y,"#888"));
+  builds.forEach(b=>drawE(b.x,b.y,"#8b5a2b"));
+
+  enemies.forEach(e=>drawE(e.x,e.y,"purple"));
+  drawE(player.x,player.y,"red");
+
+  // UI
+  ctx.fillStyle="white";
+  ctx.fillText("HP:"+Math.floor(player.hp),10,20);
+  ctx.fillText("W:"+player.inv.wood+" S:"+player.inv.stone,10,40);
+  ctx.fillText(buildMode?"BUILD MODE":"SURVIVAL",10,60);
+
+  // night
+  let dark = (Math.sin(time)+1)/2*0.5;
+  ctx.fillStyle=`rgba(0,0,30,${dark})`;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  time+=0.01;
+}
+
+// ---------------- LOOP ----------------
+
+function loop(){
+  update();
+  draw();
+  requestAnimationFrame(loop);
+}
+
+loop();
+</script>
+</body>
+</html>

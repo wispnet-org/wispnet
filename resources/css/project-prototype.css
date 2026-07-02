@@ -1,0 +1,34 @@
+/* Project Sector Styles */
+ .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+ .cta {
+      text-align: center;
+    }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  text-align: center;
+}
+
+ .card-image {
+  width: 25%;
+  height: 100px;
+  overflow: hidden;
+  margin: 0 auto 12px auto;
+}
+
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
