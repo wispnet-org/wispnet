@@ -23,5 +23,3 @@ const timer = setInterval(() => {
     function cancelRedirect() {
       cancelled = true;
     }
-
-    
