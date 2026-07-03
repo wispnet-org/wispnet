@@ -1,0 +1,40 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local IO Game</title>
+    <style>
+        body {
+        margin: 10;
+        overflow: hidden;
+        touch-action: none;
+        max-height: 88%vh;
+        }
+        button {
+            background-color: #00000000;
+            border-radius: 3px;
+        }
+        button:hover {
+            background-color: black;
+            color: white;
+        }
+        #gameCanvas {
+            border: 1px solid #000;
+            width: 90vw;
+            image-rendering: pixelated;
+            width: 90vw;
+            max-height: 90vh;
+            display: block;
+            object-fit: contain;
+        }
+    </style> 
+</head>
+<body>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <script src="game.js" defer></script>
+    <button id="startBtn">Start Game</button>
+</body>
+</html>
+
