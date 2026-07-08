@@ -1,3 +1,11 @@
+:root {
+--LightBlue: #3388BB;
+--CreamWhite: #f4f4f4;
+--DarkGrey: #333333;
+--DarkerGrey: #222222;
+--BrightOrange: #FF8C00;
+}
+
 body {
 font-family: Arial, sans-serif;
 margin: 0;
@@ -5,7 +13,7 @@ padding: 0;
 background-color: #f4f4f4;
 /* background: url('https://static.wixstatic.com/media/a3c153_3592f141741849e8b2cb99afa8e3a412~mv2.jpg') no-repeat center center fixed; */
 background-size: cover;
-color: #333;
+color: #333333;
 display: flex;
 flex-direction: column;
 min-height: 100vh;
@@ -24,55 +32,68 @@ font-size: 24px;
 h3 {
 font-weight: lighter;
 }
+
 h4 {
 font-weight: lighter;
 }
+
 h5 {
 font-weight: lighter;
 font-size: small;
 }
+
+.hero {
+  background: url("../../resources/imgl/woodhang_img\(DSC_0286\).JPG") center / cover no-repeat;
+}
+
 header {
-background: linear-gradient(#4CAF50CC, #4CAF50CC), url("../../resources/imgl/woodhang_img\(DSC_0286\).JPG") center / cover no-repeat;
+/* background: linear-gradient(#4CAF50CC, #4CAF50CC);*/
 color: #f4f4f4;
 text-align: left;
 padding-left: 30px;
 }
+
 nav {
-background-color: #333;
+background-color: #333333CC;
 overflow: hidden;
 }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+a {
+color: inherit;
+text-decoration: none;
+}
+a:hover {
+text-decoration: none; 
+}
 
-    a:hover {
-      text-decoration: none; 
-    }
+nav a {
+float: left;
+display: block;
+color: #f4f4f4;
+text-align: center;
+padding: 14px 20px;
+text-decoration: none;
+}
+nav a:hover {
+background-color: #f4f4f4;
+color: black;
+overflow: hidden; 
+transition: ease 300ms;
+}
 
-    nav a {
-      float: left;
-      display: block;
-      color: #f4f4f4;
-      text-align: center;
-      padding: 14px 20px;
-      text-decoration: none;
-    }
-    nav a:hover {
-      background-color: #f4f4f4;
-      color: black;
-      overflow: hidden; 
-      transition: ease 300ms;
-    }
-    .container {
-      margin: 20px;
-      flex: 1;
-      overflow: hidden; 
-    }
-    .main {
+.ula:hover {
+  text-decoration: underline;
+}
+
+.container {
+margin: 20px;
+flex: 1;
+overflow: hidden; 
+}
+.main {
 flex: 70%;
-padding: 20px;
+margin: 20px;
+margin-top: 0;
 background-color: #f4f4f4;
 border-radius: 12px; /* Adjust the radius for more or less rounding */
 overflow: hidden; 
@@ -94,13 +115,14 @@ width: 100%;
 }
 @media (max-width: 574px) {
   .foot-cee {
-    position: relative;        /* or static */
-    transform: translateY(90%); /* pushes it exactly its own height below the viewport */
-    /* Alternative: bottom: -100%; if using absolute/fixed positioning */
-  }
+  position: relative;  
+  transform: translateY(90%);
+  /* bottom: -100%;  (absolute/fixed positioning) */
+}
 }
 /* nsm */
 
+/* Footer CSS **********/
 .footer-columns {
 display: grid;
 grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -139,15 +161,15 @@ color: #f4f4f4;
 .main-footer-content {
   padding-left: 30px;
 }
+
 @media (max-width: 1400px), (min-width: 800px) {
   .main-footer {
-    background-size: cover;
+  background-size: cover;
   }
   .footer-columns {
-display: left;
-
-gap: 2px;
-}
+  display: left;
+  gap: 2px;
+  }
 }
 
 .sub-footer {
