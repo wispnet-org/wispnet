@@ -4,6 +4,7 @@
 --DarkGrey: #333333;
 --DarkerGrey: #222222;
 --BrightOrange: #FF8C00;
+--randomcolor: #BEEFF00D;
 }
 
 body {
@@ -120,6 +121,28 @@ width: 100%;
   /* bottom: -100%;  (absolute/fixed positioning) */
 }
 }
+
+
+/* Image CSS **********/
+.cent-image-fiss {
+margin-top: 0.25rem;
+object-fit: contain;
+width: 100%;
+min-width: 80vw;
+animation: fadeInUp 800ms ease-in forwards; 
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+}
+}
+
 /* nsm */
 
 /* Footer CSS **********/
@@ -192,6 +215,6 @@ display: none;
 /* 333333 Dark Grey */
 /* 222222 Darker Grey */
 /* FF8C00 Bright Orange */
-/* 3388BB Light Blue */
-/* 3388BB Light Blue */
+/* 4CAF50 OG Green */
+/* f6c177 Temporary Gold */
 /* 3388BB Light Blue */
